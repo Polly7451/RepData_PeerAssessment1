@@ -31,7 +31,7 @@ minute intervals each day.
 Here we will simple unzip and read in the 
 
 
-```{r DataProcess, results = TRUE,echo=TRUE}
+```{r DataProcess, results = 'asis',echo=TRUE}
 
 library("utils")
 
@@ -49,7 +49,7 @@ will ignore the NAs and change our data classes.
 
 We will also transform the data for use later on
 
-``` {r Transform, results = TRUE, echo = TRUE}
+``` {r Transform, results = 'asis', echo = TRUE}
 
 library(dplyr)
 
@@ -82,7 +82,7 @@ let's have a look at the distribution of this data by creating a histogram
 and looking at the mean and median number of steps per day
 
 
-```{r histogram, results = TRUE, include=TRUE}
+```{r histogram, fig.show = 'asis', results = 'asis', include=TRUE}
 
 
 
@@ -109,7 +109,7 @@ Here by construction of a time series plot we will look to see which interval
 on average has the maximum number of steps 
 
 
-```{r TimeSeries, results = TRUE, include=TRUE}
+```{r TimeSeries,fig.show='asis', results = TRUE, include=TRUE}
 
 
 with(Int_act, plot(x = interval, y = MeanSteps, type = "n",
@@ -133,7 +133,7 @@ Let's go back to our original data which contain the missing values, now instead
 of ignoring them, let's impute these values. I will use the median of an interval 
 as the imputed value
 
-```{r imputing, results = TRUE,}
+```{r imputing, results = 'asis'}
 Median_Vals <- Int_act[,c(1,3)] #take median values per interval
 
 activity_Imp <- merge(activity, Median_Vals, by = "interval") #merge with orig data
@@ -147,7 +147,7 @@ With our imputed values Let's see if it makes a difference on the totals and
 averages per day
 
 
-```{r ImputedSummary, include=TRUE}
+```{r ImputedSummary, results = 'asis', fig.show = 'asis', include=TRUE}
 
 
 Agg_Act2<-  act_Imp %>%
@@ -185,7 +185,7 @@ First we will add a variable to denote if a date is week or weekend then compare
 the average number of steps taken in each interval
 
 
-```{r Weekdays,results = TRUE, include=TRUE}
+```{r Weekdays,results = 'asis', fig.show='asis', include=TRUE}
 
 Week <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 

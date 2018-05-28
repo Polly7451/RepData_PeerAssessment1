@@ -138,10 +138,7 @@ $(document).ready(function () {
  activity &lt;- read.csv(&quot;activity.csv&quot;, header = TRUE, stringsAsFactors = FALSE) 
  
  str(activity)</code></pre>
-<pre><code>## 'data.frame':    17568 obs. of  3 variables:
-##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
-##  $ date    : chr  &quot;2012-10-01&quot; &quot;2012-10-01&quot; &quot;2012-10-01&quot; &quot;2012-10-01&quot; ...
-##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...</code></pre>
+<p>‘data.frame’: 17568 obs. of 3 variables: $ steps : int NA NA NA NA NA NA NA NA NA NA … $ date : chr “2012-10-01” “2012-10-01” “2012-10-01” “2012-10-01” … $ interval: int 0 5 10 15 20 25 30 35 40 45 …</p>
 <p>The data currently contains a lot on NAs and are not of the right class. For now will ignore the NAs and change our data classes.</p>
 <p>We will also transform the data for use later on</p>
 <pre class="r"><code>library(dplyr)</code></pre>
