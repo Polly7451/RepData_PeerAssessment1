@@ -5,13 +5,7 @@ output:
     keep_md: true
 ---
 
----
-title: "Reproducible Research: Peer Assessment 1"
-author: "Polly"
-date: "28 May 2018"
-output: html_document
-  keep_md: true
----
+
 
 
 ```r
@@ -120,13 +114,19 @@ and looking at the mean and median number of steps per day
 
 
 ```r
+png('figure/plot2.png')
+
 with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 
 with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
+dev.off()
 ```
 
-![](./figure/histogram-1.png)<!-- -->
+```
+## png 
+##   2
+```
 
 ```r
 meanSteps <- mean(Agg_Act$TotalStep)
