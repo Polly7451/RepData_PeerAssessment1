@@ -82,7 +82,7 @@ let's have a look at the distribution of this data by creating a histogram
 and looking at the mean and median number of steps per day
 
 
-```{r histogram}
+```{r histogram, include=TRUE}
 
 
 
@@ -109,7 +109,7 @@ Here by construction of a time series plot we will look to see which interval
 on average has the maximum number of steps 
 
 
-```{r TimeSeries}
+```{r TimeSeries, include=TRUE}
 
 
 with(Int_act, plot(x = interval, y = MeanSteps, type = "n",
@@ -147,7 +147,7 @@ With our imputed values Let's see if it makes a difference on the totals and
 averages per day
 
 
-```{r ImputedSummary}
+```{r ImputedSummary, include=TRUE}
 
 
 Agg_Act2<-  act_Imp %>%
@@ -185,7 +185,7 @@ First we will add a variable to denote if a date is week or weekend then compare
 the average number of steps taken in each interval
 
 
-```{r Weekdays}
+```{r Weekdays, include=TRUE}
 
 Week <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 
