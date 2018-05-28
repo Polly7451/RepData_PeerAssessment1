@@ -12,7 +12,13 @@ date: "28 May 2018"
 output: html_document
   keep_md: true
 ---
-#A little Exploratory Analysis Walk through from Wearble Tech data
+
+
+```r
+library(knitr)
+
+opts_chunk$set(fig.path = "./figure/")
+```
 
 We will look to walk through some initail exploratory analyis on data from wearable tech
 devices
@@ -44,10 +50,12 @@ library("utils")
  str(activity)
 ```
 
-'data.frame':	17568 obs. of  3 variables:
- $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
- $ date    : chr  "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
- $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+```
+## 'data.frame':	17568 obs. of  3 variables:
+##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ date    : chr  "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+```
 
 The data currently contains a lot on NAs and are not of the right class. For now
 will ignore the NAs and change our data classes.
@@ -107,17 +115,13 @@ and looking at the mean and median number of steps per day
 
 
 ```r
-png('figure/plot1.png')
-
 with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 
 with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
-dev.off()
 ```
 
-png 
-  2 
+![](./figure/histogram-1.png)<!-- -->
 
 ```r
 meanSteps <- mean(Agg_Act$TotalStep)
@@ -195,8 +199,10 @@ text(x = 11500, y = 25, "Median")
 dev.off()
 ```
 
-png 
-  2 
+```
+## png 
+##   2
+```
 
 ```r
 ImpmeanSteps <- mean(Agg_Act2$TotalStep)
@@ -248,8 +254,10 @@ xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$Da
 dev.off()
 ```
 
-png 
-  2 
+```
+## png 
+##   2
+```
 
 Our plot shows that activity at the weekend is more constant throughout the day
 where as during the week there is a spike in the mornings

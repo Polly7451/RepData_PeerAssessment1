@@ -12,7 +12,13 @@ date: "28 May 2018"
 output: html_document
   keep_md: true
 ---
-#A little Exploratory Analysis Walk through from Wearble Tech data
+
+```{r}
+
+library(knitr)
+
+opts_chunk$set(fig.path = "./figure/")
+```
 
 We will look to walk through some initail exploratory analyis on data from wearable tech
 devices
@@ -31,7 +37,7 @@ minute intervals each day.
 Here we will simple unzip and read in the 
 
 
-```{r DataProcess, results = 'asis',echo=TRUE}
+```{r DataProcess}
 
 library("utils")
 
@@ -49,7 +55,7 @@ will ignore the NAs and change our data classes.
 
 We will also transform the data for use later on
 
-``` {r Transform, results = 'asis', echo = TRUE}
+``` {r Transform}
 
 library(dplyr)
 
@@ -82,15 +88,15 @@ let's have a look at the distribution of this data by creating a histogram
 and looking at the mean and median number of steps per day
 
 
-```{r histogram, fig.show = 'asis', results = 'asis', include=TRUE}
+```{r histogram, echo=TRUE}
 
-png('figure/plot1.png')
+
 
 with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 
 with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
-dev.off()
+
 
 meanSteps <- mean(Agg_Act$TotalStep)
 medianSteps <- median(Agg_Act$TotalStep)
@@ -110,7 +116,7 @@ Here by construction of a time series plot we will look to see which interval
 on average has the maximum number of steps 
 
 
-```{r TimeSeries,fig.show='asis', results = TRUE, include=TRUE}
+```{r TimeSeries}
 
 png('figure/plot2.png')
 with(Int_act, plot(x = interval, y = MeanSteps, type = "n",
@@ -135,7 +141,7 @@ Let's go back to our original data which contain the missing values, now instead
 of ignoring them, let's impute these values. I will use the median of an interval 
 as the imputed value
 
-```{r imputing, results = 'asis'}
+```{r imputing}
 Median_Vals <- Int_act[,c(1,3)] #take median values per interval
 
 activity_Imp <- merge(activity, Median_Vals, by = "interval") #merge with orig data
@@ -149,7 +155,7 @@ With our imputed values Let's see if it makes a difference on the totals and
 averages per day
 
 
-```{r ImputedSummary, results = 'asis', fig.show = 'asis', include=TRUE}
+```{r ImputedSummary}
 
 
 Agg_Act2<-  act_Imp %>%
@@ -187,7 +193,7 @@ First we will add a variable to denote if a date is week or weekend then compare
 the average number of steps taken in each interval
 
 
-```{r Weekdays,results = 'asis', fig.show='asis', include=TRUE}
+```{r Weekdays}
 
 Week <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 
