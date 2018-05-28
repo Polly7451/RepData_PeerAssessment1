@@ -67,26 +67,7 @@ We will also transform the data for use later on
 
 ```r
 library(dplyr)
-```
 
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 activitydate <- as.Date(activity$date, format = "%Y-%m-%d")
 
 activity$interval <- as.factor(activity$interval)
@@ -124,7 +105,7 @@ with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
 ```
 
-![](figure/plot1-1.png)<!-- -->
+![plot of chunk plot1](figure/plot1-1.png)
 
 
 ```r
@@ -135,7 +116,7 @@ medianSteps <- median(Agg_Act$TotalStep)
 from the plot above we can see the total steps per day looks to be normally 
 distributed. This is supported by the close proximity of the mean and median. 
 
-Mean number of steps = 1.0766189\times 10^{4}
+Mean number of steps = 1.0766189 &times; 10<sup>4</sup>
 Median numbers of steps = 10765
 
 
@@ -218,7 +199,7 @@ has resulted in the data becoming more right skewed.
 
 The median stays the same as expecated at 10395 but we can see the 
 skew by looking at the mean which has shifted to 9503.8688525 from 
-1.0766189\times 10^{4}. 
+1.0766189 &times; 10<sup>4</sup>. 
 
 
 
