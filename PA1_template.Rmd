@@ -1,25 +1,203 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
+author: "Polly"
+date: "28 May 2018"
+output: html_document
 ---
+#A little Exploratory Analysis Walk through from Wearble Tech data
+
+We will look to walk through some initail exploratory analyis on data from wearable tech
+devices
 
 
-## Loading and preprocessing the data
+## Loading and Processing Data
+
+This assignment makes use of data from a personal activity monitoring device. 
+This device collects data at 5 minute intervals through out the day. The data 
+consists of two months of data from an anonymous individual collected during the
+months of October and November, 2012 and include the number of steps taken in 5 
+minute intervals each day.
 
 
 
-## What is mean total number of steps taken per day?
+Here we will simple unzip and read in the 
+
+
+```{r DataProcess, echo=TRUE}
+
+library("utils")
+
+ unzip("activity.zip", files = NULL, list = FALSE, overwrite = TRUE,
+              junkpaths = FALSE, exdir = ".", unzip = "internal",
+              setTimes = FALSE)
+
+ activity <- read.csv("activity.csv", header = TRUE, stringsAsFactors = FALSE) 
+ 
+ str(activity)
+```
+
+The data currently contains a lot on NAs and are not of the right class. For now
+will ignore the NAs and change our data classes.
+
+We will also transform the data for use later on
+
+``` {r Transform, echo = TRUE}
+
+library(dplyr)
+
+activitydate <- as.Date(activity$date, format = "%Y-%m-%d")
+
+activity$interval <- as.factor(activity$interval)
+
+activity_Clean <- filter(activity, !is.na(steps))
 
 
 
-## What is the average daily activity pattern?
+#Aggregate for total steps
+
+Agg_Act<-  activity_Clean %>%
+                group_by(date) %>%
+                summarise(TotalStep = sum(steps))
+
+#Aggregate for interval averages
+
+Int_act <- activity_Clean %>%
+                group_by(interval) %>%
+                summarise(MeanSteps = mean(steps),
+                          medianSteps = median(steps))
+
+```
+
+##What is mean total number of steps taken per day?
+
+let's have a look at the distribution of this data by creating a histogram
+and looking at the mean and median number of steps per day
+
+
+```{r histogram}
+
+with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
+
+with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
+text(x = 8700, y = 22, "Mean steps")
+
+meanSteps <- mean(Agg_Act$TotalStep)
+medianSteps <- median(Agg_Act$TotalStep)
+```
+
+from the plot above we can see the total steps per day looks to be normally 
+distributed. This is supported by the close proximity of the mean and median. 
+
+Mean number of steps = `r meanSteps`
+Median numbers of steps = `r medianSteps`
+
+
+## What is the average Daily Pattern?
+
+Here by construction of a time series plot we will look to see which interval
+on average has the maximum number of steps 
+
+
+```{r TimeSeries}
+
+with(Int_act, plot(x = interval, y = MeanSteps, type = "n",
+                   main = "Average Number of Steps in 5 min Intervals",
+                   xlab = "Interval", ylab = "Average Number of Steps"))
+with(Int_act, lines(x = interval, y = MeanSteps, type = "l"))
+
+MaXInt <- Int_act[which.max(Int_act$MeanSteps),1]
+
+```
+
+From the above time series plot we can see the 5 minute interval with the maxium
+number of average steps is `r MaXInt` 
 
 
 
 ## Imputing missing values
 
+Let's go back to our original data which contain the missing values, now instead
+of ignoring them, let's impute these values. I will use the median of an interval 
+as the imputed value
+
+```{r imputing}
+Median_Vals <- Int_act[,c(1,3)] #take median values per interval
+
+activity_Imp <- merge(activity, Median_Vals, by = "interval") #merge with orig data
+
+act_Imp <- mutate(activity_Imp, steps = ifelse(is.na(steps), medianSteps, steps)) 
+
+
+```
+
+With our imputed values Let's see if it makes a difference on the totals and 
+averages per day
+
+
+```{r ImputedSummary}
+
+
+Agg_Act2<-  act_Imp %>%
+                group_by(date) %>%
+                summarise(TotalStep = sum(steps))
+
+
+with(Agg_Act2, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
+with(Agg_Act2, abline(v = mean(TotalStep), col = "blue", lwd = 2))
+with(Agg_Act2, abline(v = median(TotalStep), col = "orange", lwd = 2))
+text(x = 8400, y = 22, "Mean")
+text(x = 11500, y = 25, "Median")
+
+
+ImpmeanSteps <- mean(Agg_Act2$TotalStep)
+ImpmedianSteps <- median(Agg_Act2$TotalStep)
+
+```
+
+From our historgram above we can see that imputing the values with the median
+has resulted in the data becoming more right skewed.
+
+The median stays the same as expecated at `r ImpmedianSteps` but we can see the 
+skew by looking at the mean which has shifted to `r ImpmeanSteps` from 
+`r meanSteps`.
+
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+With our imputed data set let's now look to see if there looks to be any 
+differences in activity in the week to weekends
+
+First we will add a variable to denote if a date is week or weekend then compare
+the average number of steps taken in each interval
+
+
+```{r Weekdays}
+
+Week <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+
+Weekend <- c("Saturday", "Sunday")
+
+act_Imp$date <- as.Date(act_Imp$date, format = "%Y-%m-%d")
+
+Act_Day_Type <- act_Imp %>% mutate(Day = weekdays(date), 
+                                   DayType = ifelse(Day %in% Week, "Week", 
+                                                    "Weekend"))
+SUMAct_Day_Type <- Act_Day_Type %>%
+                        group_by(interval,DayType) %>%
+                        summarise(MeanSteps = mean(steps))
+
+
+
+library(lattice) 
+xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$DayType, 
+       layout=c(1,2), 
+       type="l",
+       xlab = "Interval",
+       ylab = "Number of steps")
+
+
+```
+
+Our plot shows that activity at the weekend is more constant throughout the day
+where as during the week there is a spike in the mornings
