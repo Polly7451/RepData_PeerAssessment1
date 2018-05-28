@@ -3,7 +3,7 @@ title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
-    self_contained: true
+ 
 ---
 
 
@@ -118,17 +118,25 @@ and looking at the mean and median number of steps per day
 
 
 ```r
+png('figure/plot1.png')
+
 with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 
 with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
+dev.off()
+```
+
+```
+## png 
+##   2
+```
 
 
+```r
 meanSteps <- mean(Agg_Act$TotalStep)
 medianSteps <- median(Agg_Act$TotalStep)
 ```
-
-![](./figure/histogram-1.png)<!-- -->
 
 from the plot above we can see the total steps per day looks to be normally 
 distributed. This is supported by the close proximity of the mean and median. 

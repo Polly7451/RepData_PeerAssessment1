@@ -3,7 +3,7 @@ title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
-    self_contained: true
+ 
 ---
 
 
@@ -87,15 +87,19 @@ let's have a look at the distribution of this data by creating a histogram
 and looking at the mean and median number of steps per day
 
 
-```{r histogram, echo=TRUE}
+```{r plot1, echo=TRUE}
 
-
+png('figure/plot1.png')
 
 with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 
 with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
+dev.off()
 
+```
+
+```{r Avgs}
 
 meanSteps <- mean(Agg_Act$TotalStep)
 medianSteps <- median(Agg_Act$TotalStep)
