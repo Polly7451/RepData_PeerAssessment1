@@ -12,14 +12,14 @@ output:
 ```r
 library(knitr)
 
-opts_chunk$set(fig.path = "./figure/") 
+opts_chunk$set(fig.path = "figure/") 
 opts_chunk$set(fig.ext = "png")
 opts_chunk$set(fig.show = "hold")
 print(opts_chunk$get("fig.path"))
 ```
 
 ```
-## [1] "./figure/"
+## [1] "figure/"
 ```
 
 We will look to walk through some initail exploratory analyis on data from wearable tech
@@ -124,7 +124,7 @@ with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
 ```
 
-![](./figure/plot1-1.png)<!-- -->
+![](figure/plot1-1.png)<!-- -->
 
 
 ```r

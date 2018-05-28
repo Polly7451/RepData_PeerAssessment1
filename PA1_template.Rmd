@@ -12,7 +12,7 @@ output:
 
 library(knitr)
 
-opts_chunk$set(fig.path = "./figure/") 
+opts_chunk$set(fig.path = "figure/") 
 opts_chunk$set(fig.ext = "png")
 opts_chunk$set(fig.show = "hold")
 print(opts_chunk$get("fig.path"))
