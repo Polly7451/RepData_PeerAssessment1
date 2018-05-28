@@ -3,6 +3,7 @@ title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
+    self_contained: true
 ---
 
 
@@ -11,7 +12,7 @@ output:
 ```r
 library(knitr)
 
-opts_chunk$set(fig.path = "./figure/")
+opts_chunk$set(fig.path = "./figure/") 
 opts_chunk$set(fig.ext = "png")
 opts_chunk$set(fig.show = "hold")
 print(opts_chunk$get("fig.path"))
@@ -109,7 +110,7 @@ Int_act <- activity_Clean %>%
 ```
 
 
-##What is mean total number of steps taken per day?
+## What is mean total number of steps taken per day?
 
 let's have a look at the distribution of this data by creating a histogram
 and looking at the mean and median number of steps per day
