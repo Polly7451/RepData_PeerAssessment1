@@ -15,7 +15,7 @@ library(knitr)
 opts_chunk$set(fig.path = "figure/") 
 opts_chunk$set(fig.ext = "png")
 opts_chunk$set(fig.show = "hold")
-print(opts_chunk$get("fig.path"))
+print(opts_chunk$get("fig.path")) 
 ```
 
 ```
@@ -128,22 +128,16 @@ on average has the maximum number of steps
 
 
 ```r
-png('figure/plot2.png')
 with(Int_act, plot(x = interval, y = MeanSteps, type = "n",
                    main = "Average Number of Steps in 5 min Intervals",
                    xlab = "Interval", ylab = "Average Number of Steps"))
 with(Int_act, lines(x = interval, y = MeanSteps, type = "l"))
-dev.off()
-```
 
-```
-## png 
-##   2
-```
 
-```r
 MaXInt <- Int_act[which.max(Int_act$MeanSteps),1]
 ```
+
+![plot of chunk TimeSeries](figure/TimeSeries-1.png)
 
 From the above time series plot we can see the 5 minute interval with the maxium
 number of average steps is 835 
@@ -174,25 +168,20 @@ averages per day
 Agg_Act2<-  act_Imp %>%
                 group_by(date) %>%
                 summarise(TotalStep = sum(steps))
-png('figure/plot3.png')
+
 
 with(Agg_Act2, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 with(Agg_Act2, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 with(Agg_Act2, abline(v = median(TotalStep), col = "orange", lwd = 2))
 text(x = 8400, y = 22, "Mean")
 text(x = 11500, y = 25, "Median")
-dev.off()
-```
 
-```
-## png 
-##   2
-```
 
-```r
 ImpmeanSteps <- mean(Agg_Act2$TotalStep)
 ImpmedianSteps <- median(Agg_Act2$TotalStep)
 ```
+
+![plot of chunk ImputedSummary](figure/ImputedSummary-1.png)
 
 From our historgram above we can see that imputing the values with the median
 has resulted in the data becoming more right skewed.
@@ -228,7 +217,7 @@ SUMAct_Day_Type <- Act_Day_Type %>%
                         summarise(MeanSteps = mean(steps))
 
 
-png('figure/plot4.png')
+
 
 library(lattice) 
 xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$DayType, 
@@ -236,13 +225,9 @@ xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$Da
        type="l",
        xlab = "Interval",
        ylab = "Number of steps")
-dev.off()
 ```
 
-```
-## png 
-##   2
-```
+![plot of chunk Weekdays](figure/Weekdays-1.png)
 
 Our plot shows that activity at the weekend is more constant throughout the day
 where as during the week there is a spike in the mornings
