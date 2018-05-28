@@ -12,6 +12,8 @@ output:
 library(knitr)
 
 opts_chunk$set(fig.path = "./figure/")
+opts_chunk$set(fig.ext = "png")
+opts_chunk$set(fig.show = "hold")
 print(opts_chunk$get("fig.path"))
 ```
 
@@ -106,6 +108,7 @@ Int_act <- activity_Clean %>%
                           medianSteps = median(steps))
 ```
 
+
 ##What is mean total number of steps taken per day?
 
 let's have a look at the distribution of this data by creating a histogram
@@ -114,24 +117,17 @@ and looking at the mean and median number of steps per day
 
 
 ```r
-png('figure/plot2.png')
-
 with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 
 with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
-dev.off()
-```
 
-```
-## png 
-##   2
-```
 
-```r
 meanSteps <- mean(Agg_Act$TotalStep)
 medianSteps <- median(Agg_Act$TotalStep)
 ```
+
+![](./figure/histogram-1.png)<!-- -->
 
 from the plot above we can see the total steps per day looks to be normally 
 distributed. This is supported by the close proximity of the mean and median. 
