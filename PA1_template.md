@@ -109,21 +109,17 @@ and looking at the mean and median number of steps per day
 
 
 ```r
-png('plot1.png')
-
 with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 
 with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
+```
 
+![](PA1_template_files/figure-html/histogram-1.png)<!-- -->
+
+```r
 meanSteps <- mean(Agg_Act$TotalStep)
 medianSteps <- median(Agg_Act$TotalStep)
-dev.off()
-```
-
-```
-## png 
-##   2
 ```
 
 from the plot above we can see the total steps per day looks to be normally 
@@ -141,20 +137,16 @@ on average has the maximum number of steps
 
 
 ```r
-png('plot2.png')
-
 with(Int_act, plot(x = interval, y = MeanSteps, type = "n",
                    main = "Average Number of Steps in 5 min Intervals",
                    xlab = "Interval", ylab = "Average Number of Steps"))
 with(Int_act, lines(x = interval, y = MeanSteps, type = "l"))
+```
 
+![](PA1_template_files/figure-html/TimeSeries-1.png)<!-- -->
+
+```r
 MaXInt <- Int_act[which.max(Int_act$MeanSteps),1]
-dev.off()
-```
-
-```
-## png 
-##   2
 ```
 
 From the above time series plot we can see the 5 minute interval with the maxium
@@ -187,21 +179,15 @@ Agg_Act2<-  act_Imp %>%
                 group_by(date) %>%
                 summarise(TotalStep = sum(steps))
 
-png('plot3.png')
 
 with(Agg_Act2, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 with(Agg_Act2, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 with(Agg_Act2, abline(v = median(TotalStep), col = "orange", lwd = 2))
 text(x = 8400, y = 22, "Mean")
 text(x = 11500, y = 25, "Median")
-
-dev.off()
 ```
 
-```
-## png 
-##   2
-```
+![](PA1_template_files/figure-html/ImputedSummary-1.png)<!-- -->
 
 ```r
 ImpmeanSteps <- mean(Agg_Act2$TotalStep)
@@ -213,7 +199,7 @@ has resulted in the data becoming more right skewed.
 
 The median stays the same as expecated at 10395 but we can see the 
 skew by looking at the mean which has shifted to 9503.8688525 from 
-1.0766189\times 10^{4}.
+1.0766189\times 10^{4}. 
 
 
 
@@ -242,7 +228,7 @@ SUMAct_Day_Type <- Act_Day_Type %>%
                         summarise(MeanSteps = mean(steps))
 
 
-png('plot4.png')
+
 
 library(lattice) 
 xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$DayType, 
@@ -250,13 +236,9 @@ xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$Da
        type="l",
        xlab = "Interval",
        ylab = "Number of steps")
-dev.off()
 ```
 
-```
-## png 
-##   2
-```
+![](PA1_template_files/figure-html/Weekdays-1.png)<!-- -->
 
 Our plot shows that activity at the weekend is more constant throughout the day
 where as during the week there is a spike in the mornings

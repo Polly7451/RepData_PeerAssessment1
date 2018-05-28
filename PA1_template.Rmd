@@ -84,7 +84,7 @@ and looking at the mean and median number of steps per day
 
 ```{r histogram}
 
-png('plot1.png')
+
 
 with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 
@@ -93,7 +93,7 @@ text(x = 8700, y = 22, "Mean steps")
 
 meanSteps <- mean(Agg_Act$TotalStep)
 medianSteps <- median(Agg_Act$TotalStep)
-dev.off()
+
 ```
 
 from the plot above we can see the total steps per day looks to be normally 
@@ -111,7 +111,6 @@ on average has the maximum number of steps
 
 ```{r TimeSeries}
 
-png('plot2.png')
 
 with(Int_act, plot(x = interval, y = MeanSteps, type = "n",
                    main = "Average Number of Steps in 5 min Intervals",
@@ -119,7 +118,7 @@ with(Int_act, plot(x = interval, y = MeanSteps, type = "n",
 with(Int_act, lines(x = interval, y = MeanSteps, type = "l"))
 
 MaXInt <- Int_act[which.max(Int_act$MeanSteps),1]
-dev.off()
+
 
 ```
 
@@ -155,7 +154,6 @@ Agg_Act2<-  act_Imp %>%
                 group_by(date) %>%
                 summarise(TotalStep = sum(steps))
 
-png('plot3.png')
 
 with(Agg_Act2, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 with(Agg_Act2, abline(v = mean(TotalStep), col = "blue", lwd = 2))
@@ -163,7 +161,7 @@ with(Agg_Act2, abline(v = median(TotalStep), col = "orange", lwd = 2))
 text(x = 8400, y = 22, "Mean")
 text(x = 11500, y = 25, "Median")
 
-dev.off()
+
 ImpmeanSteps <- mean(Agg_Act2$TotalStep)
 ImpmedianSteps <- median(Agg_Act2$TotalStep)
 
@@ -203,7 +201,7 @@ SUMAct_Day_Type <- Act_Day_Type %>%
                         summarise(MeanSteps = mean(steps))
 
 
-png('plot4.png')
+
 
 library(lattice) 
 xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$DayType, 
@@ -211,7 +209,7 @@ xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$Da
        type="l",
        xlab = "Interval",
        ylab = "Number of steps")
-dev.off()
+
 
 ```
 
