@@ -107,13 +107,17 @@ and looking at the mean and median number of steps per day
 
 
 ```r
+png('figure/plot1.png')
+
 with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 
 with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
+dev.off()
 ```
 
-![](PA1_template_files/figure-html/histogram-1.png)<!-- -->
+png 
+  2 
 
 ```r
 meanSteps <- mean(Agg_Act$TotalStep)
@@ -135,13 +139,18 @@ on average has the maximum number of steps
 
 
 ```r
+png('figure/plot2.png')
 with(Int_act, plot(x = interval, y = MeanSteps, type = "n",
                    main = "Average Number of Steps in 5 min Intervals",
                    xlab = "Interval", ylab = "Average Number of Steps"))
 with(Int_act, lines(x = interval, y = MeanSteps, type = "l"))
+dev.off()
 ```
 
-![](PA1_template_files/figure-html/TimeSeries-1.png)<!-- -->
+```
+## png 
+##   2
+```
 
 ```r
 MaXInt <- Int_act[which.max(Int_act$MeanSteps),1]
@@ -176,16 +185,18 @@ averages per day
 Agg_Act2<-  act_Imp %>%
                 group_by(date) %>%
                 summarise(TotalStep = sum(steps))
-
+png('figure/plot3.png')
 
 with(Agg_Act2, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 with(Agg_Act2, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 with(Agg_Act2, abline(v = median(TotalStep), col = "orange", lwd = 2))
 text(x = 8400, y = 22, "Mean")
 text(x = 11500, y = 25, "Median")
+dev.off()
 ```
 
-![](PA1_template_files/figure-html/ImputedSummary-1.png)<!-- -->
+png 
+  2 
 
 ```r
 ImpmeanSteps <- mean(Agg_Act2$TotalStep)
@@ -226,7 +237,7 @@ SUMAct_Day_Type <- Act_Day_Type %>%
                         summarise(MeanSteps = mean(steps))
 
 
-
+png('figure/plot4.png')
 
 library(lattice) 
 xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$DayType, 
@@ -234,9 +245,11 @@ xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$Da
        type="l",
        xlab = "Interval",
        ylab = "Number of steps")
+dev.off()
 ```
 
-![](PA1_template_files/figure-html/Weekdays-1.png)<!-- -->
+png 
+  2 
 
 Our plot shows that activity at the weekend is more constant throughout the day
 where as during the week there is a spike in the mornings

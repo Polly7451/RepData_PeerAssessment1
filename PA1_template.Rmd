@@ -1,8 +1,8 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
 output: 
-  html_document
-    
+  html_document:
+    keep_md: true
 ---
 
 ---
@@ -84,12 +84,13 @@ and looking at the mean and median number of steps per day
 
 ```{r histogram, fig.show = 'asis', results = 'asis', include=TRUE}
 
-
+png('figure/plot1.png')
 
 with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 
 with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
+dev.off()
 
 meanSteps <- mean(Agg_Act$TotalStep)
 medianSteps <- median(Agg_Act$TotalStep)
@@ -111,11 +112,12 @@ on average has the maximum number of steps
 
 ```{r TimeSeries,fig.show='asis', results = TRUE, include=TRUE}
 
-
+png('figure/plot2.png')
 with(Int_act, plot(x = interval, y = MeanSteps, type = "n",
                    main = "Average Number of Steps in 5 min Intervals",
                    xlab = "Interval", ylab = "Average Number of Steps"))
 with(Int_act, lines(x = interval, y = MeanSteps, type = "l"))
+dev.off()
 
 MaXInt <- Int_act[which.max(Int_act$MeanSteps),1]
 
@@ -153,14 +155,14 @@ averages per day
 Agg_Act2<-  act_Imp %>%
                 group_by(date) %>%
                 summarise(TotalStep = sum(steps))
-
+png('figure/plot3.png')
 
 with(Agg_Act2, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 with(Agg_Act2, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 with(Agg_Act2, abline(v = median(TotalStep), col = "orange", lwd = 2))
 text(x = 8400, y = 22, "Mean")
 text(x = 11500, y = 25, "Median")
-
+dev.off()
 
 ImpmeanSteps <- mean(Agg_Act2$TotalStep)
 ImpmedianSteps <- median(Agg_Act2$TotalStep)
@@ -201,7 +203,7 @@ SUMAct_Day_Type <- Act_Day_Type %>%
                         summarise(MeanSteps = mean(steps))
 
 
-
+png('figure/plot4.png')
 
 library(lattice) 
 xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$DayType, 
@@ -209,7 +211,7 @@ xyplot(SUMAct_Day_Type$MeanSteps ~ SUMAct_Day_Type$interval | SUMAct_Day_Type$Da
        type="l",
        xlab = "Interval",
        ylab = "Number of steps")
-
+dev.off()
 
 ```
 
