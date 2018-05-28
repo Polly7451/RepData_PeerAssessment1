@@ -177,8 +177,8 @@ text(x = 8400, y = 22, "Mean")
 text(x = 11500, y = 25, "Median")
 
 
-ImpmeanSteps <- mean(Agg_Act2$TotalStep)
-ImpmedianSteps <- median(Agg_Act2$TotalStep)
+ImpmeanSteps <- round(mean(Agg_Act2$TotalStep),0)
+ImpmedianSteps <- round(median(Agg_Act2$TotalStep),0)
 ```
 
 ![plot of chunk ImputedSummary](figure/ImputedSummary-1.png)
@@ -186,8 +186,8 @@ ImpmedianSteps <- median(Agg_Act2$TotalStep)
 From our historgram above we can see that imputing the values with the median
 has resulted in the data becoming more right skewed.
 
-The median stays the same as expecated at 10395 but we can see the 
-skew by looking at the mean which has shifted to 9503.8688525 from 
+The median stays the same as expecated at 1.0395 &times; 10<sup>4</sup> but we can see the 
+skew by looking at the mean which has shifted to 9504 from 
 1.0766 &times; 10<sup>4</sup>. 
 
 

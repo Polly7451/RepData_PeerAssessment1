@@ -173,8 +173,8 @@ text(x = 8400, y = 22, "Mean")
 text(x = 11500, y = 25, "Median")
 
 
-ImpmeanSteps <- mean(Agg_Act2$TotalStep)
-ImpmedianSteps <- median(Agg_Act2$TotalStep)
+ImpmeanSteps <- round(mean(Agg_Act2$TotalStep),0)
+ImpmedianSteps <- round(median(Agg_Act2$TotalStep),0)
 
 ```
 
