@@ -18,6 +18,11 @@ output: html_document
 library(knitr)
 
 opts_chunk$set(fig.path = "./figure/")
+print(opts_chunk$get("fig.path"))
+```
+
+```
+## [1] "./figure/"
 ```
 
 We will look to walk through some initail exploratory analyis on data from wearable tech

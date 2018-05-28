@@ -124,7 +124,9 @@ $(document).ready(function () {
 
 <pre class="r"><code>library(knitr)
 
-opts_chunk$set(fig.path = &quot;./figure/&quot;)</code></pre>
+opts_chunk$set(fig.path = &quot;./figure/&quot;)
+print(opts_chunk$get(&quot;fig.path&quot;))</code></pre>
+<pre><code>## [1] &quot;./figure/&quot;</code></pre>
 <p>We will look to walk through some initail exploratory analyis on data from wearable tech devices</p>
 <div id="loading-and-processing-data" class="section level2">
 <h2>Loading and Processing Data</h2>
