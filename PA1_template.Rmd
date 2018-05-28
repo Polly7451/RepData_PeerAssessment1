@@ -99,8 +99,8 @@ text(x = 8700, y = 22, "Mean steps")
 
 ```{r Avgs}
 
-meanSteps <- mean(Agg_Act$TotalStep)
-medianSteps <- median(Agg_Act$TotalStep)
+meanSteps <- round(mean(Agg_Act$TotalStep),0)
+medianSteps <- round(median(Agg_Act$TotalStep),0)
 
 
 
@@ -134,7 +134,7 @@ MaXInt <- Int_act[which.max(Int_act$MeanSteps),1]
 ```
 
 From the above time series plot we can see the 5 minute interval with the maxium
-number of average steps is `r MaXInt` 
+number of average steps is `r MaXInt` interval 
 
 
 

@@ -109,15 +109,15 @@ text(x = 8700, y = 22, "Mean steps")
 
 
 ```r
-meanSteps <- mean(Agg_Act$TotalStep)
-medianSteps <- median(Agg_Act$TotalStep)
+meanSteps <- round(mean(Agg_Act$TotalStep),0)
+medianSteps <- round(median(Agg_Act$TotalStep),0)
 ```
 
 from the plot above we can see the total steps per day looks to be normally 
 distributed. This is supported by the close proximity of the mean and median. 
 
-Mean number of steps = 1.0766189 &times; 10<sup>4</sup>
-Median numbers of steps = 10765
+Mean number of steps = 1.0766 &times; 10<sup>4</sup>
+Median numbers of steps = 1.0765 &times; 10<sup>4</sup>
 
 
 ## What is the average Daily Pattern?
@@ -140,7 +140,7 @@ MaXInt <- Int_act[which.max(Int_act$MeanSteps),1]
 ![plot of chunk TimeSeries](figure/TimeSeries-1.png)
 
 From the above time series plot we can see the 5 minute interval with the maxium
-number of average steps is 835 
+number of average steps is 835 interval 
 
 
 
@@ -188,7 +188,7 @@ has resulted in the data becoming more right skewed.
 
 The median stays the same as expecated at 10395 but we can see the 
 skew by looking at the mean which has shifted to 9503.8688525 from 
-1.0766189 &times; 10<sup>4</sup>. 
+1.0766 &times; 10<sup>4</sup>. 
 
 
 
