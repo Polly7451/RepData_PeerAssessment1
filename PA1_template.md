@@ -118,19 +118,13 @@ and looking at the mean and median number of steps per day
 
 
 ```r
-png('figure/plot1.png')
-
 with(Agg_Act, hist(TotalStep, main = "Total Steps per Day", xlab = "Total Steps"))
 
 with(Agg_Act, abline(v = mean(TotalStep), col = "blue", lwd = 2))
 text(x = 8700, y = 22, "Mean steps")
-dev.off()
 ```
 
-```
-## png 
-##   2
-```
+![](./figure/plot1-1.png)<!-- -->
 
 
 ```r
